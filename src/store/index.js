@@ -26,8 +26,13 @@ const store = new Vuex.Store({
                 children: [
                     {
                         type: 'ios-grid',
-                        name: 't1',
+                        name: 'PatentData',
                         text: '大模型专利数据',
+                    },
+                    {
+                        type: 'ios-grid',
+                        name: 'treeContainer',
+                        text: '专利结构图',
                     },
                     {
                         type: 'ios-grid',

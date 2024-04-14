@@ -4,8 +4,8 @@
         <aside :class="asideClassName">
             <!-- logo -->
             <div class="logo-c">
-                <img src="../assets/imgs/logo.png" alt="logo" class="logo">
-                <span v-show="isShowAsideTitle">后台管理系统</span>
+                <img src="../assets/imgs/favicon.jpg" alt="logo" class="logo">
+                <span v-show="isShowAsideTitle">大模型专利数据分析</span>
             </div>
             <!-- 菜单栏 -->
             <Menu class="menu" ref="asideMenu" theme="dark" width="100%" @on-select="selectMenuCallback"
@@ -106,9 +106,8 @@
                             </div>
                             <DropdownMenu slot="list">
                                 <!-- name标识符 -->
-                                <DropdownItem name="1">修改密码</DropdownItem>
-                                <DropdownItem name="2">基本资料</DropdownItem>
-                                <DropdownItem divided  name="3">退出登陆</DropdownItem>
+                                <DropdownItem name="1">修改用户信息</DropdownItem>
+                                <DropdownItem divided  name="2">退出登陆</DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
                     </div>
@@ -339,13 +338,9 @@ export default {
             switch (name) {
                 case '1':
                     // 修改密码
-                    this.gotoPage('password')
+                    this.gotoPage('UpdateInfo')
                     break
                 case '2':
-                    // 基本资料
-                    this.gotoPage('userinfo')
-                    break
-                case '3':
                     resetTokenAndClearUser()
                     this.$router.push({ name: 'login' })
                     break

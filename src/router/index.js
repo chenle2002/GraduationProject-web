@@ -27,11 +27,17 @@ export const asyncRoutes = {
         meta: { title: '主页' },
         component: () => import('../views/Home.vue'),
     },
-    t1: {
-        path: 't1',
-        name: 't1',
+    PatentData: {
+        path: 'PatentData',
+        name: 'PatentData',
         meta: { title: '表格' },
-        component: () => import('../views/T1.vue'),
+        component: () => import('../views/PatentData.vue'),
+    },
+    treeContainer: {
+        path: 'treeContainer',
+        name: 'treeContainer',
+        meta: { title: '表格' },
+        component: () => import('../views/treeContainer.vue'),
     },
     PredictClassify: {
         path: 'PredictClassify',
