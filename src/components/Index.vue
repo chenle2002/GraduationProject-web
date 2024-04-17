@@ -88,11 +88,11 @@
                         <p class="crumbs">{{crumbs}}</p>
                     </div>
                     <div class="h-right">
-                        <!-- 消息 -->
-                        <div class="notice-c" @click="info" title="查看新消息">
-                            <div :class="{newMsg: hasNewMsg}"></div>
-                            <Icon type="ios-notifications-outline" />
-                        </div>
+<!--                        &lt;!&ndash; 消息 &ndash;&gt;-->
+<!--                        <div class="notice-c" @click="info" title="查看新消息">-->
+<!--                            <div :class="{newMsg: hasNewMsg}"></div>-->
+<!--                            <Icon type="ios-notifications-outline" />-->
+<!--                        </div>-->
                         <!-- 用户头像 -->
                         <div class="user-img-c">
                             <img :src="userImg">

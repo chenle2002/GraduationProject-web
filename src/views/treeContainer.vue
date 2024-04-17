@@ -52,69 +52,97 @@ export default {
                 basicSwitch: false,
                 data: {
                     id: 0,
-                    label: 'XXX科技有限公司',
+                    label: '大模型',
                     children: [
                         {
-                            id: 2,
-                            label: '产品研发部',
+                            id: 1,
+                            label: '图像与视频处理领域',
                             children: [
                                 {
+                                    id: 4,
+                                    label: '人脸识别与表情分析',
+                                },
+                                {
                                     id: 5,
-                                    label: '研发-前端',
+                                    label: '图像分割与数据处理',
                                     children: [
                                         {
-                                            id: 55,
-                                            label: '前端1',
+                                            id: 11,
+                                            label: '卷积神经网络',
                                         },
                                         {
-                                            id: 56,
-                                            label: '前端2',
+                                            id: 12,
+                                            label: 'Transformer',
                                         },
                                         {
-                                            id: 57,
-                                            label: '前端3',
+                                            id: 13,
+                                            label: 'U-net模型',
                                         },
                                         {
-                                            id: 58,
-                                            label: '前端4',
+                                            id: 14,
+                                            label: '医学图像分割',
                                         },
                                     ],
                                 },
                                 {
                                     id: 6,
-                                    label: '研发-后端',
+                                    label: '视频分析与行为识别',
+                                },
+                                {
+                                    id: 7,
+                                    label: '图像识别与神经网络',
+                                },
+                            ],
+                        },
+                        {
+                            id: 2,
+                            label: '自然语言处理与语音领域',
+                            children: [
+                                {
+                                    id: 8,
+                                    label: '语音识别与情感分析',
                                 },
                                 {
                                     id: 9,
-                                    label: 'UI设计',
+                                    label: '对话系统与语义理解',
                                 },
                                 {
                                     id: 10,
-                                    label: '产品经理',
+                                    label: '文本处理与语言模型',
+                                    children: [
+                                        {
+                                            id: 15,
+                                            label: '医学领域的文本处理',
+                                        },
+                                        {
+                                            id: 16,
+                                            label: '通用文本处理与语言模型',
+                                        },
+                                        {
+                                            id: 17,
+                                            label: '文本分类与语义分析',
+                                        },
+                                    ],
                                 },
                             ],
                         },
                         {
                             id: 3,
-                            label: '销售部',
+                            label: '智能系统与感知领域',
                             children: [
                                 {
-                                    id: 7,
-                                    label: '销售一部',
+                                    id: 5,
+                                    label: '人工智能应用和平台',
                                 },
                                 {
-                                    id: 8,
-                                    label: '销售二部',
+                                    id: 6,
+                                    label: '电力系统故障识别与预测',
+                                },
+                                {
+                                    id: 9,
+                                    label: '车辆识别与自动驾驶',
                                 },
                             ],
-                        },
-                        {
-                            id: 4,
-                            label: '财务部',
-                        },
-                        {
-                            id: 9,
-                            label: 'HR人事',
                         },
                     ],
                 },
@@ -132,11 +160,8 @@ export default {
             return (
                 <div>
                     <div>
-                        <i class="el-icon-user-solid"></i>
                         <span>{data.label}</span>
-                        <span>男</span>
                     </div>
-                    <div style="font-size:12px;line-height:20px;">测试人员</div>
                 </div>
             )
         },
