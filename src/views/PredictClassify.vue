@@ -7,7 +7,7 @@
 
         <el-main style="background-color: #f8f4ff;margin-top: 1%; overflow-y: scroll;">
             <div class="search-container">
-                <el-input v-model="text" placeholder="Number" style="width: 40%; margin-bottom: 20px;">
+                <el-input v-model="text" placeholder="TEXT" style="width: 40%; margin-bottom: 20px;">
                     <el-button slot="append" icon="el-icon-search" @click="search" style="text-align: center">分类结果</el-button>
                 </el-input>
                 <el-button type="success" style="margin-left: 5%" plain @click="clear">清除当此查询结果</el-button>
@@ -21,15 +21,15 @@
                     </div>
 
                     <div style="float: left;width: 40%;">
-                        <p>您输入的文本信息：</p>
-                        <p style="margin-top: 5%">{{ this.text }}</p>
+                        <p style="font-weight: bold;font-size: 18px;">您输入的文本信息：</p>
+                        <p style="margin-top: 5%;font-weight: bold">{{ this.text }}</p>
                     </div>
 
-                    <div style="float: left;width: 15%;">
+                    <div style="float: left;width: 15%;font-weight: bold;font-size: 18px;">
                         <p>搜索用时：</p>
                         <el-button type="info" style="margin-top: 8%" plain>{{ this.time }}</el-button>
                     </div>
-                    <div style="float: left;width: 15%;">
+                    <div style="float: left;width: 15%;font-weight: bold;font-size: 18px;">
                         <p>文本分类结果：</p>
                         <el-button type="primary" style="margin-top: 8%">{{ this.classify }}</el-button>
                     </div>
@@ -60,18 +60,22 @@ export default {
             this.classify = '无'
         },
         search() {
-            axios({
-                method: 'GET',
-                url: 'http://127.0.0.1:8000/chenle/predict/',
-                params: {
-                    text: this.text,
-                },
-            }).then(res => {
-                console.log(res.data)
-                this.time = res.data.elapsed_time
-                this.classify = res.data.result
-                this.judge = !this.judge
-            })
+            if (this.text == '') {
+                this.$message.error('请先输入文本内容！')
+            } else {
+                axios({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8000/chenle/predict/',
+                    params: {
+                        text: this.text,
+                    },
+                }).then(res => {
+                    console.log(res.data)
+                    this.time = res.data.elapsed_time
+                    this.classify = res.data.result
+                    this.judge = !this.judge
+                })
+            }
         },
     },
 }

@@ -1,13 +1,14 @@
 <template>
     <div>
-        <div style="margin-top: 5%">
+        <div style="margin-top: 2%">
             <div>
-                <p style="margin-bottom: 1%">请输入需要进行预测的列，我们将会把所有列进行拼接完成预测：</p>
-                <el-input v-model="this.param.columns" placeholder="格式例如：1,5,14" :rules="inputRules"></el-input>
+                <h1 style="margin-bottom: 1%">请输入需要进行预测的列，我们将会把所有列进行拼接完成预测：</h1>
+                <el-input style="width: 40%;margin-left: 1%" v-model="this.param.columns"
+                          placeholder="格式例如：1,5,14" :rules="inputRules"></el-input>
             </div>
         </div>
 
-        <div style="text-align: center;margin-top: 10%">
+        <div style="text-align: center;margin-top: 8%">
             <el-upload
                 ref="upload"
                 :accept="fileType.join(',')"
@@ -28,13 +29,13 @@
                     提示：仅允许导入“xls”或“xlsx”格式文件！
                 </div>
             </el-upload>
-            <el-button type="success" size="mini" @click="submitUpload">上传到服务器</el-button>
+            <el-button type="success" size="mini" style="margin-top: 2%" @click="submitUpload">点击此处上传到服务器</el-button>
         </div>
-        <div>
+        <div style="text-align: right;margin-bottom: 2%;margin-right: 1%">
             <el-button type="primary" @click="checkFileStatus">检查文件处理状态</el-button>
         </div>
-        <div>
-            <el-button type="primary" @click="downloadExcel">下载Excel文件</el-button>
+        <div style="text-align: right;margin-right: 1%">
+            <el-button type="primary" style="text-align: right" @click="downloadExcel">下载Excel文件</el-button>
         </div>
     </div>
 </template>
@@ -71,46 +72,54 @@ export default {
     },
     methods: {
         checkFileStatus() {
-            axios({
-                method: 'GET',
-                url: 'http://127.0.0.1:8000/chenle/judge_exist/',
-                params: {
-                    user_name: localStorage.getItem('userName'),
-                    file_name: this.file_name,
-                },
-            }).then(res => {
-                if (res.data === 'yes') {
-                    this.$message.success('您的Excel文件已经处理完成！')
-                } else {
-                    this.$message.warning('您的文件暂未处理完成！')
-                }
-            })
+            if (this.file_name == '') {
+                this.$message.error('请先完成文件上传！')
+            } else {
+                axios({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8000/chenle/judge_exist/',
+                    params: {
+                        user_name: localStorage.getItem('userName'),
+                        file_name: this.file_name,
+                    },
+                }).then(res => {
+                    if (res.data === 'yes') {
+                        this.$message.success('您的Excel文件已经处理完成！')
+                    } else {
+                        this.$message.warning('您的文件暂未处理完成！')
+                    }
+                })
+            }
         },
         downloadExcel() {
-            // 向后端发送请求下载文件
-            // eslint-disable-next-line max-len
-            axios({
-                method: 'GET',
-                url: 'http://127.0.0.1:8000/chenle/download/',
-                params: {
-                    user_name: localStorage.getItem('userName'),
-                    file_name: this.file_name,
-                },
-                responseType: 'blob',
-            }).then(response => {
-                // 创建一个URL对象，用于生成文件下载链接
-                const url = window.URL.createObjectURL(new Blob([response.data]))
-                // 创建一个a标签，设置下载链接，并模拟点击
-                const link = document.createElement('a')
-                link.href = url
-                link.setAttribute('download', 'data.xlsx')
-                document.body.appendChild(link)
-                link.click()
-                // 释放URL对象
-                window.URL.revokeObjectURL(url)
-            }).catch(error => {
-                console.error('下载失败：', error)
-            })
+            if (this.file_name == '') {
+                this.$message.error('请先完成文件上传！')
+            } else {
+                // 向后端发送请求下载文件
+                // eslint-disable-next-line max-len
+                axios({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:8000/chenle/download/',
+                    params: {
+                        user_name: localStorage.getItem('userName'),
+                        file_name: this.file_name,
+                    },
+                    responseType: 'blob',
+                }).then(response => {
+                    // 创建一个URL对象，用于生成文件下载链接
+                    const url = window.URL.createObjectURL(new Blob([response.data]))
+                    // 创建一个a标签，设置下载链接，并模拟点击
+                    const link = document.createElement('a')
+                    link.href = url
+                    link.setAttribute('download', 'data.xlsx')
+                    document.body.appendChild(link)
+                    link.click()
+                    // 释放URL对象
+                    window.URL.revokeObjectURL(url)
+                }).catch(error => {
+                    console.error('下载失败：', error)
+                })
+            }
         },
         // 文件上传中处理
         handleFileProgress() {

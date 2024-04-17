@@ -36,21 +36,20 @@
             <el-table-column
                 prop="专利类型"
                 label="专利类型"
-                width="120">
+                width="90">
             </el-table-column>           <!--设置列标-->
             <el-table-column
                 :show-overflow-tooltip="true"
-                prop="技术摘要"
-                label="技术摘要"
-                width="120">
-            </el-table-column>
-            <el-table-column
-                :show-overflow-tooltip="true"
-                prop="中文摘要_技术摘要"
+                prop="摘要_技术摘要"
                 label="中文摘要+技术摘要"
                 width="200">
             </el-table-column>
-            <el-table-column label="操作" align="center" min-width="100">
+            <el-table-column
+                prop="预测结果"
+                label="预测结果"
+                width="150">
+            </el-table-column>
+            <el-table-column label="操作" align="center" min-width="80">
                 <template slot-scope="scope">
                     <el-button type="info" @click="deleter(scope.row.序号)">删除</el-button>
                 </template>

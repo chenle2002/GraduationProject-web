@@ -3,7 +3,7 @@
         <div style="margin-left:30px;">
             <el-row :gutter="20">
                 <el-col :span="5">
-                    <el-switch v-model="horizontal" :width="50" active-text="横排" inactive-text="竖排" style="margin-top:8px;"/>
+<!--                    <el-switch v-model="horizontal" :width="50" active-text="横排" inactive-text="竖排" style="margin-top:8px;"/>-->
                 </el-col>
                 <el-col :span="5">
                     <el-switch v-model="expandAll" :width="50" active-text="全部展开"
@@ -22,6 +22,18 @@
                     </el-select>
                 </el-col>
             </el-row>
+        </div>
+        <div style="background-color: #cccccc;height: 100%;width: 50%;text-align: center">
+            <!-- 消息弹窗 -->
+            <div v-if="showPopup" style="background-color: #cccccc;position: fixed;z-index: 9999;
+            width: 60%;height: 55%;margin-top:5%;margin-left: 15%">
+                <div class="popup-content">
+                    <span class="close" style="float: right;" @click="showPopup = false">&times;</span>
+                    <h1>{{ node.name }}</h1>
+                    <h2 style="text-align: left;margin-left: 2%">分类介绍：{{ node.info }}</h2>
+                    <img style="width: 40%;" :src="imgPath" alt="Node Image"/>
+                </div>
+            </div>
         </div>
         <div style="font-size:12px;margin-top:30px;">
             <el-scrollbar :style="scrollTreeStyle" class="el-org-tree">
@@ -42,10 +54,15 @@
 
 
 <script>
+import axios from 'axios'
+
 export default {
     name: 'treeContainer',
     data() {
         return {
+            showPopup: false,
+            imgPath: '',
+            node: {},
             treeData: {
                 labelClassName: 'bg-color-orange',
                 basicInfo: { id: null, label: '---null' },
@@ -59,67 +76,67 @@ export default {
                             label: '图像与视频处理领域',
                             children: [
                                 {
-                                    id: 4,
+                                    id: 2,
                                     label: '人脸识别与表情分析',
                                 },
                                 {
-                                    id: 5,
+                                    id: 3,
                                     label: '图像分割与数据处理',
                                     children: [
                                         {
-                                            id: 11,
+                                            id: 4,
                                             label: '卷积神经网络',
                                         },
                                         {
-                                            id: 12,
+                                            id: 5,
                                             label: 'Transformer',
                                         },
                                         {
-                                            id: 13,
+                                            id: 6,
                                             label: 'U-net模型',
                                         },
                                         {
-                                            id: 14,
+                                            id: 7,
                                             label: '医学图像分割',
                                         },
                                     ],
                                 },
                                 {
-                                    id: 6,
+                                    id: 8,
                                     label: '视频分析与行为识别',
                                 },
                                 {
-                                    id: 7,
+                                    id: 9,
                                     label: '图像识别与神经网络',
                                 },
                             ],
                         },
                         {
-                            id: 2,
+                            id: 10,
                             label: '自然语言处理与语音领域',
                             children: [
                                 {
-                                    id: 8,
+                                    id: 11,
                                     label: '语音识别与情感分析',
                                 },
                                 {
-                                    id: 9,
+                                    id: 12,
                                     label: '对话系统与语义理解',
                                 },
                                 {
-                                    id: 10,
+                                    id: 13,
                                     label: '文本处理与语言模型',
                                     children: [
                                         {
-                                            id: 15,
+                                            id: 14,
                                             label: '医学领域的文本处理',
                                         },
                                         {
-                                            id: 16,
+                                            id: 15,
                                             label: '通用文本处理与语言模型',
                                         },
                                         {
-                                            id: 17,
+                                            id: 16,
                                             label: '文本分类与语义分析',
                                         },
                                     ],
@@ -127,19 +144,19 @@ export default {
                             ],
                         },
                         {
-                            id: 3,
+                            id: 17,
                             label: '智能系统与感知领域',
                             children: [
                                 {
-                                    id: 5,
+                                    id: 18,
                                     label: '人工智能应用和平台',
                                 },
                                 {
-                                    id: 6,
+                                    id: 19,
                                     label: '电力系统故障识别与预测',
                                 },
                                 {
-                                    id: 9,
+                                    id: 20,
                                     label: '车辆识别与自动驾驶',
                                 },
                             ],
@@ -164,23 +181,6 @@ export default {
                     </div>
                 </div>
             )
-        },
-
-        // 鼠标移出
-        onMouseout(e, data) {
-            this.treeData.basicSwitch = false
-        },
-        // 鼠标移入
-        onMouseover(e, data) {
-            this.treeData.basicInfo = data
-            this.treeData.basicSwitch = true
-            let floating = document.getElementsByClassName('floating')[0]
-            floating.style.left = e.clientX + 'px'
-            floating.style.top = e.clientY + 'px'
-        },
-        // 点击节点
-        NodeClick(e, data) {
-            console.log(e, data)
         },
         // 默认展开
         toggleExpand(data, val) {
@@ -224,7 +224,19 @@ export default {
 
         // 自定义您的点击事件
         onNodeClick(e, data) {
-            alert('点击')
+            console.log(data.id)
+            axios({
+                method: 'GET',
+                url: 'http://127.0.0.1:8000/chenle/getinfobyid/',
+                params: {
+                    id: data.id,
+                },
+            }).then(res => {
+                this.showPopup = true
+                this.node = res.data
+                this.imgPath = '/umap_img/wordcloud' + data.id + '.png'
+                console.log(this.imgPath)
+            })
         },
 
         expandChange() {
@@ -249,39 +261,50 @@ export default {
 .bg-white {
     background-color: white;
 }
+
 .bg-orange {
     background-color: orange;
 }
+
 .bg-gold {
     background-color: gold;
 }
+
 .bg-gray {
     background-color: gray;
 }
+
 .bg-lightpink {
     background-color: lightpink;
 }
+
 .bg-chocolate {
     background-color: chocolate;
 }
+
 .bg-tomato {
     background-color: tomato;
 }
+
 //.org-tree-node-label-inner {
 //  color: #fff;
 //  background-color: orange;
 //}
 
 .el-org-tree {
+    height: 120%;
     .el-scrollbar__wrap {
         overflow-x: hidden;
     }
+
     .org-tree-node-label {
         white-space: nowrap;
     }
-    .el-tree-node__content{
+
+    .el-tree-node__content {
         background: white;
     }
+
     .org-tree-node-label .org-tree-node-label-inner {
         padding-top: 8px;
         padding-right: 10px;
@@ -289,9 +312,12 @@ export default {
         padding-left: 10px;
         cursor: pointer;
     }
+
     .horizontal .org-tree-node.is-leaf {
         padding-top: 5px;
         padding-bottom: 5px;
     }
 }
+
+//******
 </style>
