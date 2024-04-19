@@ -41,7 +41,7 @@ const store = new Vuex.Store({
                     },
                     {
                         type: 'ios-grid',
-                        name: 'FuckExcel',
+                        name: 'PredictExcel',
                         text: '批量处理Excel',
                     },
                 ],

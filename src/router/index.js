@@ -39,11 +39,11 @@ export const asyncRoutes = {
         meta: { title: '表格' },
         component: () => import('../views/treeContainer.vue'),
     },
-    FuckExcel: {
-        path: 'FuckExcel',
-        name: 'FuckExcel',
+    PredictExcel: {
+        path: 'PredictExcel',
+        name: 'PredictExcel',
         meta: { title: '表格' },
-        component: () => import('../views/FuckExcel.vue'),
+        component: () => import('../views/PredictExcel.vue'),
     },
     PredictClassify: {
         path: 'PredictClassify',

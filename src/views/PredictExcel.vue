@@ -45,7 +45,7 @@
 import axios from 'axios'
 
 export default {
-    name: 'FuckExcel',
+    name: 'PredictExcel',
     data() {
         return {
             file_name: '',
