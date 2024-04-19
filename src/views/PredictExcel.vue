@@ -117,7 +117,7 @@ export default {
                     // 释放URL对象
                     window.URL.revokeObjectURL(url)
                 }).catch(error => {
-                    console.error('下载失败：', error)
+                    this.$message.error('文件下载失败！')
                 })
             }
         },
