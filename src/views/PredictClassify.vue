@@ -65,12 +65,11 @@ export default {
             } else {
                 axios({
                     method: 'GET',
-                    url: 'http://127.0.0.1:8000/chenle/predict/',
+                    url: 'http://106.54.17.29:8000/chenle/predict/',
                     params: {
                         text: this.text,
                     },
                 }).then(res => {
-                    console.log(res.data)
                     this.time = res.data.elapsed_time
                     this.classify = res.data.result
                     this.judge = !this.judge

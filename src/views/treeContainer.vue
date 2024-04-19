@@ -224,10 +224,9 @@ export default {
 
         // 自定义您的点击事件
         onNodeClick(e, data) {
-            console.log(data.id)
             axios({
                 method: 'GET',
-                url: 'http://127.0.0.1:8000/chenle/getinfobyid/',
+                url: 'http://106.54.17.29:8000/chenle/getinfobyid/',
                 params: {
                     id: data.id,
                 },
@@ -235,7 +234,6 @@ export default {
                 this.showPopup = true
                 this.node = res.data
                 this.imgPath = '/umap_img/wordcloud' + data.id + '.png'
-                console.log(this.imgPath)
             })
         },
 

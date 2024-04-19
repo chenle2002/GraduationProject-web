@@ -68,7 +68,7 @@ export default {
                 } else {
                     axios({
                         method: 'GET',
-                        url: 'http://127.0.0.1:8000/system/update/',
+                        url: 'http://106.54.17.29:8000/system/update/',
                         params: {
                             user_name: this.user_name,
                             password: this.password,

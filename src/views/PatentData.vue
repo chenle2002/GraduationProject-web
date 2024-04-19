@@ -88,7 +88,6 @@ export default {
     },
     methods: {
         deleter(val) {
-            console.log(val)
             this.$confirm('此操作将永久删除该专利数据, 是否继续?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
@@ -96,7 +95,7 @@ export default {
             }).then(() => {
                 axios({
                     method: 'GET',
-                    url: 'http://127.0.0.1:8000/chenle/delete/',
+                    url: 'http://106.54.17.29:8000/chenle/delete/',
                     params: {
                         id: val,
                     },
@@ -119,13 +118,11 @@ export default {
         },
         // 每页条数改变时触发 选择一页显示多少行
         handleSizeChange(val) {
-            console.log(`每页 ${val} 条`)
             this.currentPage = 1
             this.pageSize = val
         },
         // 当前页改变时触发 跳转其他页
         handleCurrentChange(val) {
-            console.log(`当前页: ${val}`)
             this.currentPage = val
             this.getlivestockInfo(val)
         },
@@ -135,7 +132,7 @@ export default {
             const params = new URLSearchParams()
             params.append('page', num1)
             // console.log("params",params)
-            let url = 'http://127.0.0.1:8000/api/patent/list/?page=' + that.currentPage
+            let url = 'http://106.54.17.29:8000/api/patent/list/?page=' + that.currentPage
             axios.get(url, params)
             .then(response => {
                 // console.log('请求成功');
@@ -143,11 +140,7 @@ export default {
                 that.currentPage = num1
                 that.pageSize = that.tableData.pageSize
                 that.total = that.tableData.total
-                console.log('请求成功, 获取' + that.tableData.list.length + '条数据')
-                console.log(that.tableData)
             }).catch(error => {
-                console.log('请求失败')
-                console.log(error)
             })
         },
     },

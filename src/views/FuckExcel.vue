@@ -42,7 +42,7 @@
 
 
 <script>
-import axios from '_axios@0.19.2@axios'
+import axios from 'axios'
 
 export default {
     name: 'FuckExcel',
@@ -64,7 +64,7 @@ export default {
             upload: {
                 // 设置上传的请求头部
                 // 上传地址
-                url: 'http://127.0.0.1:8000/chenle/process_excel/',
+                url: 'http://106.54.17.29:8000/chenle/process_excel/',
                 // 是否更新已经存在的用户数据
                 isUploading: false,
             },
@@ -77,7 +77,7 @@ export default {
             } else {
                 axios({
                     method: 'GET',
-                    url: 'http://127.0.0.1:8000/chenle/judge_exist/',
+                    url: 'http://106.54.17.29:8000/chenle/judge_exist/',
                     params: {
                         user_name: localStorage.getItem('userName'),
                         file_name: this.file_name,
@@ -99,7 +99,7 @@ export default {
                 // eslint-disable-next-line max-len
                 axios({
                     method: 'GET',
-                    url: 'http://127.0.0.1:8000/chenle/download/',
+                    url: 'http://106.54.17.29:8000/chenle/download/',
                     params: {
                         user_name: localStorage.getItem('userName'),
                         file_name: this.file_name,
