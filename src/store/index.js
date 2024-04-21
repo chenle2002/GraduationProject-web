@@ -52,13 +52,18 @@ const store = new Vuex.Store({
                 children: [
                     {
                         type: 'ios-grid',
-                        name: 't1',
-                        text: '大模型专利数据',
+                        name: 'GetTopicSyntax',
+                        text: '专利检索式初步构建',
                     },
                     {
-                        size: 18, // icon大小
-                        type: 'md-arrow-forward', // icon类型
-                        text: '分类预测',
+                        type: 'ios-grid',
+                        name: 'BuildSyntaxByTarget',
+                        text: '专利检索式优化',
+                    },
+                    {
+                        type: 'ios-grid',
+                        name: 'GetIpc',
+                        text: '专利IPC分类号预测',
                     },
                 ],
             },

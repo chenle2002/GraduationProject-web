@@ -51,6 +51,24 @@ export const asyncRoutes = {
         meta: { title: '模型分类预测' },
         component: () => import('../views/PredictClassify.vue'),
     },
+    GetIpc: {
+        path: 'GetIpc',
+        name: 'GetIpc',
+        meta: { title: '专利分类号预测' },
+        component: () => import('../views/GetIpc.vue'),
+    },
+    GetTopicSyntax: {
+        path: 'GetTopicSyntax',
+        name: 'GetTopicSyntax',
+        meta: { title: '专利检索式初步构建' },
+        component: () => import('../views/GetTopicSyntax.vue'),
+    },
+    BuildSyntaxByTarget: {
+        path: 'BuildSyntaxByTarget',
+        name: 'BuildSyntaxByTarget',
+        meta: { title: '专利检索式优化' },
+        component: () => import('../views/BuildSyntaxByTarget.vue'),
+    },
     UpdateInfo: {
         path: 'UpdateInfo',
         name: 'UpdateInfo',
