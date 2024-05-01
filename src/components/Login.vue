@@ -1,7 +1,7 @@
 <template>
     <div class="login-vue" :style="bg">
         <div class="container">
-            <p class="title">WELCOME</p>
+            <p class="title">{{ title }}</p>
             <div class="input-c">
                 <Input prefix="ios-contact" v-model="user_name" placeholder="用户名" clearable @on-blur="verifyAccount"/>
                 <p class="error">{{ accountError }}</p>
@@ -11,7 +11,9 @@
                        @keyup.enter.native="submit"/>
                 <p class="error">{{ pwdError }}</p>
             </div>
-            <Button :loading="isShowLoading" class="submit" type="primary" @click="submit">登陆</Button>
+            <Button v-if="judge" :loading="isShowLoading" class="submit" type="primary" @click="check" style="margin-bottom: 2%">注册</Button>
+            <Button v-if="judge" :loading="isShowLoading" class="submit" type="primary" @click="submit">登陆</Button>
+            <Button v-if="!judge" :loading="isShowLoading" class="submit" type="primary" @click="submit_l">提交</Button>
         </div>
     </div>
 </template>
@@ -23,12 +25,14 @@ export default {
     name: 'login',
     data() {
         return {
+            title: '请登录',
             user_name: 'chenle',
             password: '123456',
             accountError: '',
             pwdError: '',
             isShowLoading: false,
             bg: {},
+            judge: true,
         }
     },
     created() {
@@ -62,6 +66,33 @@ export default {
         },
         forgetPwd() {
 
+        },
+        check() {
+            this.judge = false
+            this.title = '请注册'
+            this.user_name = ''
+            this.password = ''
+        },
+        submit_l() {
+            if (this.user_name === '' || this.password === '') {
+                this.$message.error('账号与密码均不能为空')
+            } else {
+                axios({
+                    method: 'GET',
+                    url: 'http://106.54.17.29:8000/system/insert/',
+                    params: {
+                        user_name: this.user_name,
+                        password: this.password,
+                    },
+                }).then(res => {
+                    if (res.data === '新建用户成功') {
+                        this.$message.success(res.data)
+                        this.judge = true
+                    } else {
+                        this.$message.error(res.data)
+                    }
+                })
+            }
         },
         submit() {
             if (this.user_name === '' || this.password === '') {

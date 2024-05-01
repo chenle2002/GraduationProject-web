@@ -44,6 +44,16 @@ const store = new Vuex.Store({
                         name: 'PredictExcel',
                         text: '批量处理Excel',
                     },
+                    {
+                        type: 'ios-grid',
+                        name: 'Collection',
+                        text: '个人收藏查看',
+                    },
+                    {
+                        type: 'ios-grid',
+                        name: 'Record',
+                        text: '文本预测记录',
+                    },
                 ],
             },
             {

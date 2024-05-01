@@ -68,6 +68,7 @@ export default {
                     url: 'http://106.54.17.29:8000/chenle/predict/',
                     params: {
                         text: this.text,
+                        user_name: localStorage.getItem('userName'),
                     },
                 }).then(res => {
                     this.time = res.data.elapsed_time

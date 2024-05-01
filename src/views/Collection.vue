@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- 表格 -->
-        <el-table :data="tableData.list"  style="width: 100%">
+        <el-table :data="tableData.list" style="width: 100%">
             <el-table-column
                 prop="序号"
                 label="序号"
@@ -10,7 +10,7 @@
             <el-table-column
                 prop="标题_中文_field"
                 label="标题 (中文)"
-                width="120">
+                width="200">
             </el-table-column>
             <el-table-column
                 :show-overflow-tooltip="true"
@@ -49,11 +49,6 @@
                 label="预测结果"
                 width="150">
             </el-table-column>
-            <el-table-column label="操作" align="center" min-width="80">
-                <template slot-scope="scope">
-                    <el-button type="primary" @click="shoucang(scope.row.序号)">收藏</el-button>
-                </template>
-            </el-table-column>
         </el-table>
         <!-- 分页器 -->
         <div class="block" style="margin-top:15px;">
@@ -74,7 +69,7 @@
 import axios from 'axios'
 
 export default {
-    name: 'PatentData',
+    name: 'Collection',
     data() {
         return {
             tableData: {},
@@ -87,63 +82,6 @@ export default {
         this.getlivestockInfo(1)
     },
     methods: {
-        deleter(val) {
-            this.$confirm('此操作将永久删除该专利数据, 是否继续?', '提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
-                type: 'warning',
-            }).then(() => {
-                axios({
-                    method: 'GET',
-                    url: 'http://106.54.17.29:8000/chenle/delete/',
-                    params: {
-                        id: val,
-                    },
-                }).then(res => {
-                    if (res.data === '删除成功') {
-                        this.$message({
-                            type: 'success',
-                            message: '删除成功!',
-                        })
-                    } else {
-                        this.$message.error(res.data)
-                    }
-                })
-            }).catch(() => {
-                this.$message({
-                    type: 'info',
-                    message: '已取消删除',
-                })
-            })
-        },
-        shoucang(val) {
-            this.$confirm('是否收藏此条大模型专利数据?', '提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
-                type: 'info',
-            }).then(() => {
-                axios({
-                    method: 'GET',
-                    url: 'http://106.54.17.29:8000/chenle/collect/',
-                    params: {
-                        user_name: localStorage.getItem('userName'),
-                        id: val,
-                    },
-                }).then(res => {
-                    if (res.data === '收藏成功！') {
-                        this.$message({
-                            type: 'success',
-                            message: '收藏成功!',
-                        })
-                    }
-                })
-            }).catch(() => {
-                this.$message({
-                    type: 'info',
-                    message: '已取消删除',
-                })
-            })
-        },
         // 每页条数改变时触发 选择一页显示多少行
         handleSizeChange(val) {
             this.currentPage = 1
@@ -160,9 +98,8 @@ export default {
             const params = new URLSearchParams()
             params.append('page', num1)
             // console.log("params",params)
-            let url = 'http://106.54.17.29:8000/api/patent/list/?page=' + that.currentPage
-            axios.get(url, params)
-            .then(response => {
+            let url = 'http://106.54.17.29:8000/chenle/getusercollect/?user_name=' + localStorage.getItem('userName')
+            axios.get(url, params).then(response => {
                 // console.log('请求成功');
                 that.tableData = response.data.data
                 that.currentPage = num1

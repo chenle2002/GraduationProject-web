@@ -45,6 +45,18 @@ export const asyncRoutes = {
         meta: { title: '表格' },
         component: () => import('../views/PredictExcel.vue'),
     },
+    Collection: {
+        path: 'Collection',
+        name: 'Collection',
+        meta: { title: '表格' },
+        component: () => import('../views/Collection.vue'),
+    },
+    Record: {
+        path: 'Record',
+        name: 'Record',
+        meta: { title: '表格' },
+        component: () => import('../views/Record.vue'),
+    },
     PredictClassify: {
         path: 'PredictClassify',
         name: 'PredictClassify',
