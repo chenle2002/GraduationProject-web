@@ -17,7 +17,7 @@
                     drag
                 >
                     <i class="el-icon-upload"/>
-                    <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                    <div class="el-upload__text">将目标文件拖到此处，或<em>点击上传</em></div>
                     <div slot="tip" class="el-upload__tip" style="color: red">
                         提示：仅允许导入“xls”或“xlsx”格式文件！
                     </div>
@@ -53,6 +53,7 @@
             <div v-if="syntax" style="float: right;width: 60%;font-weight: bold;font-size: 18px;">
                 <p>检索式生成结果</p>
                 <div style="border: solid 2px;" >{{syntax}}</div>
+                <div style="border: solid 2px;" >在给定的专利数据中，查全率：{{Fixed(recall)}}，查准率：{{Fixed(precision)}}</div>
             </div>
             <div v-if="notWord" style="width: 60%;float:right;font-weight: bold;font-size: 18px;">
                 <p>备选无关词</p>
@@ -73,6 +74,8 @@ export default {
             syntax: null,
             notWord: null,
             file_name: '',
+            recall: null,
+            precision: null,
             param: {
                 user_name: localStorage.getItem('userName'),
             },
@@ -84,11 +87,15 @@ export default {
             ],
             fileType: ['.xlsx', '.xls'],
             targetUpload: {
-                url: 'http://106.54.17.29:8000/wei/loadTargetData/',
+                url: 'http://localhost:8000/wei/loadTargetData/',
                 isUploading: false,
             },
             otherUpload: {
-                url: 'http://106.54.17.29:8000/wei/loadOtherData/',
+                url: 'http://localhost:8000/wei/loadOtherData/',
+                isUploading: false,
+            },
+            dataUpload: {
+                url: 'http://localhost:8000/wei/loadData/',
                 isUploading: false,
             },
         }
@@ -97,13 +104,15 @@ export default {
         search() {
             axios({
                 method: 'GET',
-                url: 'http://106.54.17.29:8000/wei/buildSyntaxByTarget/',
+                url: 'http://localhost:8000/wei/buildSyntaxByTarget/',
                 params: {
                 },
             }).then(res => {
                 if (res.status == 200 && res.data) {
                     this.syntax = res.data.data.syntax
                     this.notWord = res.data.data.notWord
+                    this.recall = res.data.data.recall
+                    this.precision = res.data.data.precision
                 } else {
                     this.$message.error('未传入专利数据')
                 }
@@ -141,6 +150,10 @@ export default {
             } else {
                 callback()
             }
+        },
+        Fixed(data) {
+            let res = (data * 100).toFixed(2) + '%'
+            return res
         },
     },
 }

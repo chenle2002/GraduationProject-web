@@ -57,7 +57,7 @@ const store = new Vuex.Store({
                 ],
             },
             {
-                text: '韦江潮',
+                text: '检索式辅助构建',
                 type: 'ios-paper',
                 children: [
                     {
@@ -74,6 +74,16 @@ const store = new Vuex.Store({
                         type: 'ios-grid',
                         name: 'GetIpc',
                         text: '专利IPC分类号预测',
+                    },
+                    {
+                        type: 'ios-grid',
+                        name: 'GetTopicSyntaxBig',
+                        text: '检索式构建',
+                    },
+                    {
+                        type: 'ios-grid',
+                        name: 'SyntaxData',
+                        text: '检索式展示',
                     },
                 ],
             },

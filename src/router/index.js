@@ -63,6 +63,18 @@ export const asyncRoutes = {
         meta: { title: '模型分类预测' },
         component: () => import('../views/PredictClassify.vue'),
     },
+    SyntaxData: {
+        path: 'SyntaxData',
+        name: 'SyntaxData',
+        meta: { title: '检索式展示' },
+        component: () => import('../views/SyntaxData.vue'),
+    },
+    GetTopicSyntaxBig: {
+        path: 'GetTopicSyntaxBig',
+        name: 'GetTopicSyntaxBig',
+        meta: { title: '检索式' },
+        component: () => import('../views/GetTopicSyntaxBig.vue'),
+    },
     GetIpc: {
         path: 'GetIpc',
         name: 'GetIpc',
