@@ -79,7 +79,7 @@ export default {
             }).then(() => {
                 axios({
                     method: 'GET',
-                    url: 'http://localhost:8000/wei/delete/',
+                    url: 'http://106.54.17.29:8000/wei/delete/',
                     params: {
                         id: val,
                     },
@@ -114,7 +114,7 @@ export default {
         getlivestockInfo(num1) {
             axios({
                 method: 'GET',
-                url: 'http://localhost:8000/wei/get/',
+                url: 'http://106.54.17.29:8000/wei/get/',
                 params: {
                     user_name: localStorage.getItem('userName'),
                     page: this.currentPage,
@@ -130,7 +130,7 @@ export default {
         add() {
             axios({
                 method: 'GET',
-                url: 'http://localhost:8000/wei/insert/',
+                url: 'http://106.54.17.29:8000/wei/insert/',
                 params: {
                     user_name: localStorage.getItem('userName'),
                     syntax: this.text,

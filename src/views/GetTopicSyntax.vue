@@ -73,7 +73,7 @@ export default {
             } else {
                 axios({
                     method: 'GET',
-                    url: 'http://localhost:8000/wei/getTopicSyntax/',
+                    url: 'http://106.54.17.29:8000/wei/getTopicSyntax/',
                     params: {
                         text: this.text,
                     },
@@ -96,7 +96,7 @@ export default {
             } else {
                 axios({
                     method: 'GET',
-                    url: 'http://localhost:8000/wei/getSyntaxWenxinyiyan/',
+                    url: 'http://106.54.17.29:8000/wei/getSyntaxWenxinyiyan/',
                     params: {
                         text: this.text,
                     },

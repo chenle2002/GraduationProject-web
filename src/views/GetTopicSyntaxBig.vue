@@ -73,7 +73,7 @@ export default {
             keyWords: null,
             topicSyntax: null,
             dataUpload: {
-                url: 'http://localhost:8000/wei/loadData/',
+                url: 'http://106.54.17.29:8000/wei/loadData/',
                 isUploading: false,
             },
             fileType: ['.xlsx', '.xls', '.pdf', '.doc', '.docx'],
@@ -87,7 +87,7 @@ export default {
         search() {
             axios({
                 method: 'GET',
-                url: 'http://localhost:8000/wei/getTopicSyntaxBig/',
+                url: 'http://106.54.17.29:8000/wei/getTopicSyntaxBig/',
                 params: {
                 },
             }).then(res => {

@@ -87,15 +87,15 @@ export default {
             ],
             fileType: ['.xlsx', '.xls'],
             targetUpload: {
-                url: 'http://localhost:8000/wei/loadTargetData/',
+                url: 'http://106.54.17.29:8000/wei/loadTargetData/',
                 isUploading: false,
             },
             otherUpload: {
-                url: 'http://localhost:8000/wei/loadOtherData/',
+                url: 'http://106.54.17.29:8000/wei/loadOtherData/',
                 isUploading: false,
             },
             dataUpload: {
-                url: 'http://localhost:8000/wei/loadData/',
+                url: 'http://106.54.17.29:8000/wei/loadData/',
                 isUploading: false,
             },
         }
@@ -104,7 +104,7 @@ export default {
         search() {
             axios({
                 method: 'GET',
-                url: 'http://localhost:8000/wei/buildSyntaxByTarget/',
+                url: 'http://106.54.17.29:8000/wei/buildSyntaxByTarget/',
                 params: {
                 },
             }).then(res => {
