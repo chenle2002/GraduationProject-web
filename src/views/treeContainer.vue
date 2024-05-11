@@ -73,7 +73,7 @@ export default {
                     children: [
                         {
                             id: 21,
-                            label: '计算机视觉与图像处理领域',
+                            label: '三维图像识别与点云生成',
                             children: [
                                 {
                                     id: 1,
