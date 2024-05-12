@@ -73,7 +73,7 @@ export default {
                     children: [
                         {
                             id: 21,
-                            label: '计算机视觉与图像处理领域',
+                            label: '计算机视觉与图像处理',
                             children: [
                                 {
                                     id: 1,
@@ -131,7 +131,7 @@ export default {
                         },
                         {
                             id: 22,
-                            label: '自然语言处理与语音技术领域',
+                            label: '自然语言处理与语音技术',
                             children: [
                                 {
                                     id: 5,
@@ -167,7 +167,7 @@ export default {
                         },
                         {
                             id: 23,
-                            label: '计算机硬件与虚拟现实领域',
+                            label: '计算机硬件与虚拟现实',
                             children: [
                                 {
                                     id: 7,
@@ -181,7 +181,7 @@ export default {
                         },
                         {
                             id: 24,
-                            label: '医疗与生命科学领域',
+                            label: '医疗与生命科学',
                             children: [
                                 {
                                     id: 9,
